@@ -1,17 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
 Route::get('/', function () {
-    return User::all();
-});
+    Redis::publish('users.create', json_encode(['name' => 'John Doe', 'email' => 'hey']));
 
-Route::get('/follow', function (Request $request) {
-
-
+    return response()->json('success');
 });
 
 
